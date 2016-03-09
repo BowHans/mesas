@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Invitados</h2>
+
+  <!-- invitados input -->
+{{invitados}}
+  <form name ="invitadoForm" role="form" ng-submit="addInvitado()"  style="padding:5px 10px;">
+    <div class="row" ng-class="{ 'has-error' : invitadoForm.nombre.$invalid && (invitadoForm.nombre.$touched  || invitadoForm.edad.$touched) }">
+      <div class="form-group col-xs-7 nopadding" >
+
+        <input type="text" name = "nombre" ng-model="invitado.nombre" placeholder="Nombre" class="form-control" focus-me="focusNombre" required invitado-unico>
+      </div>
+      <div class="input-group col-xs-5 nopadding" >
+        <input type="number" name = "edad" ng-model="invitado.edad" placeholder="Edad" class="form-control" required>
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary" value="+" ng-disabled="invitadoForm.$invalid">
+        </span>
+      </div>
+    </div>
+    <div class="row">
+        <p ng-show="invitadoForm.nombre.$error.required && invitadoForm.nombre.$touched " class="help-block">
+          El nombre es obligatorio.</p>
+
+          <p ng-show="invitadoForm.nombre.$error.invitadoUnico" class="help-block">
+            El invitado ya existe.</p>
+        <p ng-show="invitadoForm.edad.$invalid && invitadoForm.edad.$touched" class="help-block">La edad es obligatoria.</p>
+      </div>
+
+  </form>
+<!-- sort buttons -->
+  <div class="row">
+<span class="btn-group pull-right"  style="padding:5px 10px;">
+    <button class="btn btn-default" ng-class="{ 'active' : ordenInvitados==='NombreAsc'}" ng-click="orderInvitadosNombre(true)">   <span class="glyphicon glyphicon-sort-by-alphabet"></span> </button>
+    <button class="btn btn-default" ng-class="{ 'active' : ordenInvitados==='NombreDesc'}" ng-click="orderInvitadosNombre(false)">   <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> </button>
+    <button class="btn btn-default" ng-class="{ 'active' : ordenInvitados==='EdadAsc'}"ng-click="orderInvitadosEdad(true)">   <span class="glyphicon glyphicon-sort-by-order"></span> </button>
+    <button class="btn btn-default" ng-class="{ 'active' : ordenInvitados==='EdadDesc'}"ng-click="orderInvitadosEdad(false)">   <span class="glyphicon glyphicon-sort-by-order-alt"></span> </button>
+
+         </span>
+
+  </div>
+
+
+  <!-- invitados list -->
+  <div ui-sortable ng-model="invitados">
+
+    <div  ng-repeat="invitado in invitados" style="padding:5px 10px; cursor: move;">
+      <div class="row">
+        <div class="input-group col-xs-7 nopadding" >
+          <span class="input-group-btn">
+            <button class="btn btn-info" ng-click="editaInvitado($index)" aria-label="Edit">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </span>
+          <input type="text" ng-model="invitado.nombre" class="form-control" ng-readonly="true">
+        </div>
+        <div class="input-group col-xs-5 nopadding" >
+          <input type="text" ng-model="invitado.edad" class="form-control" ng-readonly="true">
+
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="removeInvitado($index)" aria-label="Remove">X</button>
+      </span>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+    </div>

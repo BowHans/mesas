@@ -1,0 +1,70 @@
+<div class="container">
+  <h2>Grupos</h2>
+
+  <!-- grupos input -->
+
+  <form name ="grupoForm" role="form" ng-submit="addGrupo()"  style="padding:5px 10px;">
+    <div class="row" ng-class="{ 'has-error' : grupoForm.nombre.$invalid && (grupoForm.nombre.$touched  || grupoForm.edad.$touched) }">
+      <textarea class="form-control" ng-model="invitados"/>
+    </div>
+
+
+  </form>
+
+  <!-- The dnd-list directive allows to drop elements into it.
+   The dropped data will be added to the referenced list -->
+
+<ul dnd-list="list">
+  <!-- The dnd-draggable directive makes an element draggable and will
+       transfer the object that was assigned to it. If an element was
+       dragged away, you have to remove it from the original list
+       yourself using the dnd-moved attribute -->
+  <li ng-repeat="item in list"
+      dnd-draggable="item"
+      dnd-moved="list.splice($index, 1)"
+      dnd-effect-allowed="move"
+      dnd-selected="models.selected = item"
+      ng-class="{'selected': models.selected === item}"
+      >
+      {{item.label}}
+  </li>
+</ul>
+<!-- sort buttons
+  <div class="row">
+<span class="btn-group pull-right"  style="padding:5px 10px;">
+    <button class="btn btn-default" ng-class="{ 'active' : ordenGrupos==='NombreAsc'}" ng-click="orderGruposNombre(true)">   <span class="glyphicon glyphicon-sort-by-alphabet"></span> </button>
+    <button class="btn btn-default" ng-class="{ 'active' : ordenGrupos==='NombreDesc'}" ng-click="orderGruposNombre(false)">   <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> </button>
+    <button class="btn btn-default" ng-class="{ 'active' : ordenGrupos==='EdadAsc'}"ng-click="orderGruposEdad(true)">   <span class="glyphicon glyphicon-sort-by-order"></span> </button>
+    <button class="btn btn-default" ng-class="{ 'active' : ordenGrupos==='EdadDesc'}"ng-click="orderGruposEdad(false)">   <span class="glyphicon glyphicon-sort-by-order-alt"></span> </button>
+
+         </span>
+
+  </div>
+ -->
+
+  <!-- grupos list
+  <div ui-sortable ng-model="grupos">
+
+    <div  ng-repeat="grupo in grupos" style="padding:5px 10px; cursor: move;">
+      <div class="row">
+        <div class="input-group col-xs-7 nopadding" >
+          <span class="input-group-btn">
+            <button class="btn btn-info" ng-click="editaGrupo($index)" aria-label="Edit">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </span>
+          <input type="text" ng-model="grupo.nombre" class="form-control" ng-readonly="true">
+        </div>
+        <div class="input-group col-xs-5 nopadding" >
+          <input type="text" ng-model="grupo.edad" class="form-control" ng-readonly="true">
+
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="removeGrupo($index)" aria-label="Remove">X</button>
+      </span>
+      </div>
+    </div>
+    </div>
+
+  </div>
+ -->
+    </div>
